@@ -1,0 +1,319 @@
+       /* Reset + base */
+       * {
+           box-sizing: border-box;
+       }
+
+       html,
+       body {
+           height: 100%;
+           margin: 0;
+           font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+           background: #070707;
+           color: #e9e6e1;
+           -webkit-font-smoothing: antialiased;
+           -moz-osx-font-smoothing: grayscale;
+       }
+
+       /* Center app and keep within 100vh */
+       .app-shell {
+           min-height: 100vh;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           padding: 28px;
+       }
+
+       /* Card */
+       .card {
+           width: 420px;
+           max-width: calc(100% - 48px);
+           height: calc(100vh - 56px);
+           /* ensures card remains inside viewport */
+           max-height: 900px;
+           background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+           border-radius: 18px;
+           padding: 22px;
+           display: flex;
+           flex-direction: column;
+           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+           border: 1px solid rgba(255, 215, 0, 0.06);
+           position: relative;
+           overflow: hidden;
+       }
+
+       /* Header */
+       .header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           gap: 12px;
+       }
+
+       .brand {
+           display: flex;
+           flex-direction: column;
+           line-height: 1.2;
+       }
+
+       .brand .title {
+           font-size: 22px;
+           letter-spacing: 0.6px;
+           font-weight: 600;
+           color: #fff;
+       }
+
+       .brand .subtitle {
+           font-size: 12px;
+           opacity: 0.6;
+       }
+
+       .balance {
+           text-align: right;
+       }
+
+       .balance .net {
+           font-size: 26px;
+           font-weight: 700;
+           color: #ffd166;
+           /* gold */
+       }
+
+       .balance .label {
+           font-size: 12px;
+           opacity: 0.6;
+           min-width: 100px;
+       }
+
+       /* Transactions panel (scrollable) */
+       .transactions-area {
+           margin-top: 18px;
+           display: flex;
+           flex-direction: column;
+           gap: 10px;
+           /* take remaining space between header and form */
+           flex: 1 1 auto;
+           min-height: 120px;
+       }
+
+       .transactions-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           gap: 12px;
+           margin-bottom: 6px;
+       }
+
+       .transactions-list {
+           background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+           padding: 12px;
+           border-radius: 12px;
+           border: 1px solid rgba(255, 255, 255, 0.03);
+           flex: 1;
+           overflow-y: auto;
+           display: flex;
+           flex-direction: column;
+           gap: 8px;
+           scroll-behavior: smooth;
+       }
+
+       /* custom scrollbar (optional) */
+       .transactions-list::-webkit-scrollbar {
+           width: 6px;
+       }
+
+       .transactions-list::-webkit-scrollbar-track {
+           background: rgba(255, 215, 0, 0.06);
+           border-radius: 10px;
+       }
+
+       .transactions-list::-webkit-scrollbar-thumb {
+           background: linear-gradient(180deg, #ffeaa7, #ffcf33);
+           border-radius: 10px;
+           border: 2px solid rgba(0, 0, 0, 0.4);
+           box-shadow: 0 0 6px rgba(255, 213, 0, 0.5);
+       }
+
+       .transactions-list::-webkit-scrollbar-thumb:hover {
+           background: linear-gradient(180deg, #fff4c4, #ffdb4d);
+       }
+
+
+       .transaction {
+           display: flex;
+           flex-direction: column;
+           background: rgba(255, 255, 255, 0.01);
+           border-radius: 10px;
+           padding: 12px;
+           margin-bottom: 10px;
+           transition: transform .15s ease, box-shadow .15s ease;
+           border-left: 4px solid rgba(255, 215, 0, 0.06);
+       }
+
+       .transaction:hover {
+           transform: translateY(-4px);
+           box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+       }
+
+       .tx-top {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           gap: 12px;
+           cursor: pointer;
+       }
+
+       .tx-meta {
+           display: flex;
+           flex-direction: column;
+       }
+
+       .tx-desc {
+           font-weight: 600;
+           font-size: 14px;
+           color: #fff;
+       }
+
+       .tx-amt {
+           font-size: 13px;
+           opacity: 0.78;
+           margin-top: 4px;
+       }
+
+       .tx-badge {
+           min-width: 36px;
+           height: 36px;
+           border-radius: 9px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-weight: 700;
+           font-size: 13px;
+           color: #000;
+       }
+
+       .tx-credit {
+           background: linear-gradient(180deg, #ffdd7a, #ffd166);
+       }
+
+       .tx-debit {
+           background: linear-gradient(180deg, #ff7a7a, #ff4f4f);
+           color: #fff;
+       }
+
+       .tx-actions {
+           margin-top: 10px;
+           display: flex;
+           gap: 10px;
+           justify-content: flex-end;
+           align-items: center;
+           display: none;
+           /* toggled via JS */
+       }
+
+       .tx-actions.show {
+           display: flex;
+       }
+
+       .action-btn {
+           background: rgba(255, 255, 255, 0.02);
+           border: 1px solid rgba(255, 255, 255, 0.03);
+           padding: 8px 10px;
+           border-radius: 8px;
+           font-size: 13px;
+           cursor: pointer;
+           transition: background .12s ease, transform .08s;
+           color: #fff;
+       }
+
+       .action-btn:hover {
+           transform: translateY(-2px);
+       }
+
+       /* Form area */
+       .form {
+           margin-top: 12px;
+           padding-top: 12px;
+           border-top: 1px solid rgba(255, 255, 255, 0.02);
+           display: flex;
+           flex-direction: column;
+           gap: 12px;
+           flex-shrink: 0;
+       }
+
+       .inputs {
+           display: flex;
+           gap: 10px;
+       }
+
+       .inputs .field {
+           flex: 1;
+           display: flex;
+           flex-direction: column;
+           gap: 6px;
+       }
+
+       label {
+           font-size: 12px;
+           opacity: 0.7;
+       }
+
+       input[type="text"],
+       input[type="number"] {
+           background: rgba(255, 255, 255, 0.02);
+           border: 1px solid rgba(255, 255, 255, 0.03);
+           padding: 10px 12px;
+           border-radius: 10px;
+           color: #fff;
+           outline: none;
+           font-size: 14px;
+       }
+
+       .btn-row {
+           display: flex;
+           gap: 12px;
+       }
+
+       .submit-btn {
+           flex: 1;
+           padding: 11px;
+           border-radius: 12px;
+           border: none;
+           cursor: pointer;
+           font-weight: 700;
+           letter-spacing: .3px;
+           font-size: 14px;
+           transition: transform .12s ease, opacity .12s;
+       }
+
+       .earn {
+           background: linear-gradient(180deg, rgba(255, 215, 0, 0.14), rgba(255, 215, 0, 0.06));
+           color: #0a0a0a;
+           border: 1px solid rgba(255, 215, 0, 0.24);
+       }
+
+       .expense {
+           background: linear-gradient(180deg, rgba(255, 75, 75, 0.12), rgba(255, 75, 75, 0.04));
+           color: #fff;
+           border: 1px solid rgba(255, 75, 75, 0.14);
+       }
+
+       .submit-btn:active {
+           transform: translateY(1px);
+       }
+
+       /* small screens tweak */
+       @media (max-width: 480px) {
+           .card {
+               width: 100%;
+               padding: 16px;
+               border-radius: 14px;
+           }
+
+           .brand .title {
+               font-size: 18px;
+           }
+
+           .balance .net {
+               font-size: 22px;
+           }
+       }
