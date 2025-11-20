@@ -32,5 +32,4 @@ Track income and expenses, calculate net balance, and persist data using **local
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/expense-tracker.git
-
+git clone https://github.com/Usman868/Personal-Expense-Tracker.git
