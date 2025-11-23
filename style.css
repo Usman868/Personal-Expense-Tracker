@@ -1,317 +1,270 @@
-       /* Reset + base */
-       * {
-           box-sizing: border-box;
-       }
+       :root {
+            --bg: #070707;
+            --card: #101114;
+            --muted: #bdbdbd;
+            --gold1: #ffd166;
+            --gold2: #ffcf33;
+            --accent: #48ffa0;
+            --danger: #ff6b6b
+        }
 
-       html,
-       body {
-           height: 100%;
-           margin: 0;
-           font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-           background: #070707;
-           color: #e9e6e1;
-           -webkit-font-smoothing: antialiased;
-           -moz-osx-font-smoothing: grayscale;
-       }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, Arial;
+            background: linear-gradient(135deg, #09090b, #131315, #0e0e10);
+            color: #eef0ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            overflow: hidden;
+        }
 
-       /* Center app and keep within 100vh */
-       .app-shell {
-           min-height: 100vh;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           padding: 28px;
-       }
+        .card {
+            width: 420px;
+            max-width: calc(100% - 48px);
+            height: calc(90vh - 56px);
+            background: var(--bg);
+            border-radius: 18px;
+            padding: 18px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+            transition: box-shadow 0.3s ease;
+        }
 
-       /* Card */
-       .card {
-           width: 420px;
-           max-width: calc(100% - 48px);
-           height: calc(100vh - 56px);
-           /* ensures card remains inside viewport */
-           max-height: 900px;
-           background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-           border-radius: 18px;
-           padding: 22px;
-           display: flex;
-           flex-direction: column;
-           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-           border: 1px solid rgba(255, 215, 0, 0.06);
-           position: relative;
-           overflow: hidden;
-       }
+        .card:hover {
+            box-shadow: 0 2px 20px #ffcf33;
 
-       /* Header */
-       .header {
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           gap: 12px;
-       }
-
-       .brand {
-           display: flex;
-           flex-direction: column;
-           line-height: 1.2;
-       }
-
-       .brand .title {
-           font-size: 22px;
-           letter-spacing: 0.6px;
-           font-weight: 600;
-           color: #fff;
-       }
-
-       .brand .subtitle {
-           font-size: 12px;
-           opacity: 0.6;
-       }
-
-       .balance {
-           text-align: right;
-       }
-
-       .balance .net {
-           font-size: 26px;
-           font-weight: 700;
-           color: #ffd166;
-           /* gold */
-       }
-
-       .balance .label {
-           font-size: 12px;
-           opacity: 0.6;
-           min-width: 100px;
-       }
-
-       /* Transactions panel (scrollable) */
-       .transactions-area {
-           margin-top: 18px;
-           display: flex;
-           flex-direction: column;
-           gap: 10px;
-           /* take remaining space between header and form */
-           flex: 1 1 auto;
-           min-height: 120px;
-       }
-
-       .transactions-header {
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           gap: 12px;
-           margin-bottom: 6px;
-       }
-
-       .transactions-list {
-           background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
-           padding: 12px;
-           border-radius: 12px;
-           border: 1px solid rgba(255, 255, 255, 0.03);
-           flex: 1;
-           overflow-y: auto;
-           display: flex;
-           flex-direction: column;
-           gap: 8px;
-           scroll-behavior: smooth;
-       }
-
-       /* custom scrollbar (optional) */
-       .transactions-list::-webkit-scrollbar {
-           width: 6px;
-       }
-
-       .transactions-list::-webkit-scrollbar-track {
-           background: rgba(255, 215, 0, 0.06);
-           border-radius: 10px;
-       }
-
-       .transactions-list::-webkit-scrollbar-thumb {
-           background: linear-gradient(180deg, #ffeaa7, #ffcf33);
-           border-radius: 10px;
-           border: 2px solid rgba(0, 0, 0, 0.4);
-           box-shadow: 0 0 6px rgba(255, 213, 0, 0.5);
-       }
-
-       .transactions-list::-webkit-scrollbar-thumb:hover {
-           background: linear-gradient(180deg, #fff4c4, #ffdb4d);
-       }
+        }
 
 
-       .transaction {
-           display: flex;
-           flex-direction: column;
-           background: rgba(255, 255, 255, 0.01);
-           border-radius: 10px;
-           padding: 12px;
-           margin-bottom: 10px;
-           transition: transform .15s ease, box-shadow .15s ease;
-           border-left: 4px solid rgba(255, 215, 0, 0.06);
-       }
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
 
-       .transaction:hover {
-           transform: translateY(-4px);
-           box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
-       }
+        .brand {
+            display: flex;
+            flex-direction: column
+        }
 
-       .tx-top {
-           display: flex;
-           align-items: center;
-           justify-content: space-between;
-           gap: 12px;
-           cursor: pointer;
-       }
+        .title {
+            font-size: 18px;
+            font-weight: 700
+        }
 
-       .tx-meta {
-           display: flex;
-           flex-direction: column;
-       }
+        .subtitle {
+            font-size: 12px;
+            opacity: 0.7
+        }
 
-       .tx-desc {
-           font-weight: 600;
-           font-size: 14px;
-           color: #fff;
-       }
+        .balance {
+            text-align: right
+        }
 
-       .tx-amt {
-           font-size: 13px;
-           opacity: 0.78;
-           margin-top: 4px;
-       }
+        .net {
+            font-size: 22px;
+            color: var(--gold1);
+            font-weight: 700
+        }
 
-       .tx-badge {
-           min-width: 36px;
-           height: 36px;
-           border-radius: 9px;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           font-weight: 700;
-           font-size: 13px;
-           color: #000;
-       }
+        .transactions-area {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1 1 auto;
+            /* padding-bottom:0px ; */
+        }
 
-       .tx-credit {
-           background: linear-gradient(180deg, #ffdd7a, #ffd166);
-       }
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
 
-       .tx-debit {
-           background: linear-gradient(180deg, #ff7a7a, #ff4f4f);
-           color: #fff;
-       }
+        .transactions-list {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0));
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            max-height: 50vh
+        }
 
-       .tx-actions {
-           margin-top: 10px;
-           display: flex;
-           gap: 10px;
-           justify-content: flex-end;
-           align-items: center;
-           display: none;
-           /* toggled via JS */
-       }
+        /* PREMIUM GOLD SCROLLBAR */
+        .transactions-list::-webkit-scrollbar {
+            width: 5px;
+        }
 
-       .tx-actions.show {
-           display: flex;
-       }
+        .transactions-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ffeaa7, #ffcf33);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 6px rgba(255, 213, 0, 0.35);
+        }
 
-       .action-btn {
-           background: rgba(255, 255, 255, 0.02);
-           border: 1px solid rgba(255, 255, 255, 0.03);
-           padding: 8px 10px;
-           border-radius: 8px;
-           font-size: 13px;
-           cursor: pointer;
-           transition: background .12s ease, transform .08s;
-           color: #fff;
-       }
+        .transactions-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #fff2b8, #ffdb4d);
+        }
 
-       .action-btn:hover {
-           transform: translateY(-2px);
-       }
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.01);
+            border-left: 4px solid rgba(255, 215, 0, 0.06)
+        }
 
-       /* Form area */
-       .form {
-           margin-top: 12px;
-           padding-top: 12px;
-           border-top: 1px solid rgba(255, 255, 255, 0.02);
-           display: flex;
-           flex-direction: column;
-           gap: 12px;
-           flex-shrink: 0;
-       }
+        .left {
+            display: flex;
+            flex-direction: column
+        }
 
-       .inputs {
-           display: flex;
-           gap: 10px;
-       }
+        .desc {
+            font-weight: 600
+        }
 
-       .inputs .field {
-           flex: 1;
-           display: flex;
-           flex-direction: column;
-           gap: 6px;
-       }
+        .amt {
+            opacity: 0.8;
+            margin-top: 4px
+        }
 
-       label {
-           font-size: 12px;
-           opacity: 0.7;
-       }
+        .badge {
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-weight: 700
+        }
 
-       input[type="text"],
-       input[type="number"] {
-           background: rgba(255, 255, 255, 0.02);
-           border: 1px solid rgba(255, 255, 255, 0.03);
-           padding: 10px 12px;
-           border-radius: 10px;
-           color: #fff;
-           outline: none;
-           font-size: 14px;
-       }
+        .credit {
+            background: linear-gradient(180deg, #ffdd7a, #ffd166);
+            color: #111
+        }
 
-       .btn-row {
-           display: flex;
-           gap: 12px;
-       }
+        .debit {
+            background: linear-gradient(180deg, #ff7a7a, #ff4f4f);
+            color: #fff
+        }
 
-       .submit-btn {
-           flex: 1;
-           padding: 11px;
-           border-radius: 12px;
-           border: none;
-           cursor: pointer;
-           font-weight: 700;
-           letter-spacing: .3px;
-           font-size: 14px;
-           transition: transform .12s ease, opacity .12s;
-       }
+        .actions {
+            display: flex;
+            gap: 8px
+        }
 
-       .earn {
-           background: linear-gradient(180deg, rgba(255, 215, 0, 0.14), rgba(255, 215, 0, 0.06));
-           color: #0a0a0a;
-           border: 1px solid rgba(255, 215, 0, 0.24);
-       }
+        .btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700
+        }
 
-       .expense {
-           background: linear-gradient(180deg, rgba(255, 75, 75, 0.12), rgba(255, 75, 75, 0.04));
-           color: #fff;
-           border: 1px solid rgba(255, 75, 75, 0.14);
-       }
+        .edit {
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff
+        }
 
-       .submit-btn:active {
-           transform: translateY(1px);
-       }
+        .del {
+            background: rgba(255, 0, 0, 0.08);
+            color: #fff
+        }
 
-       /* small screens tweak */
-       @media (max-width: 480px) {
-           .card {
-               width: 100%;
-               padding: 16px;
-               border-radius: 14px;
-           }
+        .form {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-shrink: 0
+        }
 
-           .brand .title {
-               font-size: 18px;
-           }
+        .inputs {
+            display: flex;
+            gap: 8px
+        }
+
+        input[type=text],
+        input[type=number],
+        select {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: #fff
+        }
+
+        select>option {
+            color: #070707;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px
+        }
+
+        .submit {
+            flex: 1;
+            padding: 11px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .earn {
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.14), rgba(255, 215, 0, 0.06));
+            color: #fff;
+            border: 1px solid rgba(255, 215, 0, 0.24)
+        }
+
+        .expense {
+            background: linear-gradient(180deg, rgba(255, 75, 75, 0.12), rgba(255, 75, 75, 0.04));
+            color: #fff;
+            border: 1px solid rgba(255, 75, 75, 0.14)
+        }
+
+        .top-right {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .logout {
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer
+        }
+
+        .welcome {
+            font-size: 13px;
+            opacity: 0.85
+        }
+
+        @media (max-width:480px) {
+            .card {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                padding: 14px
+            }
+
+            .transactions-list {
+                max-height: 50vh
+            }
+        }
 
            .balance .net {
                font-size: 22px;
